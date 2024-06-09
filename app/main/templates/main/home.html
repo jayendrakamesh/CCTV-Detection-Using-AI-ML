@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>    
+    <link rel="stylesheet" href="{% static 'styles/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/home.css' %}">
+</head>
+<body>
+    {% include 'main/navbar.html' %}
+    <div class="container2">
+        {% if f1 == "on" %}
+        <div class="video">
+            <img src="{% url 'video_feed' %}" width="600" height="400">
+        </div>
+        {% endif %}
+    </div>
+    
+</body>
+</html>
