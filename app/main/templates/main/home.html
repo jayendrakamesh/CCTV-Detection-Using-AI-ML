@@ -10,7 +10,12 @@
     <div class="container2">
         {% if f1 == "on" %}
         <div class="video">
-            <img src="{% url 'video_feed' %}" width="600" height="400">
+            <img src="{% url 'movement_feed' %}" width="600" height="400">
+        </div>
+        {% endif %}
+        {% if f2 == "on" %}
+        <div class="video">
+            <img src="{% url 'ppe_feed' %}" width="600" height="400">
         </div>
         {% endif %}
     </div>
