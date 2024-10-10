@@ -3,28 +3,28 @@
 <html>
 <head>    
     <link rel="stylesheet" href="{% static 'styles/home.css' %}">
-
 </head>
 <body>
     {% include 'main/navbar.html' %}
     <div class="container2">
         {% if f1 == "on" %}
-        <a href="{% url 'movement_feed' %}" class="video-button">
-            <img src="{% url 'movement_feed' %}" width="600" height="400" alt="Movement Feed">
+        <a href="{% url 'movement_feed' %}" class="button">
+            <img src="{% url 'movement_feed' %}" width="480" height="320" alt="Movement Feed">
         </a>
         {% endif %}
         
         {% if f2 == "on" %}
-        <a href="{% url 'door_feed' %}" class="video-button">
-            <img src="{% url 'door_feed' %}" width="600" height="400" alt="Door Feed">
+        <a href="{% url 'door_feed' %}" class="button">
+            <img src="{% url 'door_feed' %}" width="480" height="320" alt="Door Feed">
         </a>
         {% endif %}
         
         {% if f3 == "on" %}
-        <a href="{% url 'ppe_feed' %}" class="video-button">
-            <img src="{% url 'ppe_feed' %}" width="600" height="400" alt="PPE Feed">
+        <a href="{% url 'ppe_feed' %}" class="button">
+            <img src="{% url 'ppe_feed' %}" width="480" height="320" alt="PPE Feed">
         </a>
         {% endif %}
+        
     </div>
 </body>
 </html>

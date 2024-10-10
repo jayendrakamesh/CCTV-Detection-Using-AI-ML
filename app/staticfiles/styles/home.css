@@ -1,0 +1,47 @@
+
+.container2 {
+    display: flex;
+    background-color: black;
+    height: 100vh;
+    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0px;
+}
+
+.button {
+    display: inline-block; /* Ensure button is treated as a block element */
+    background-color: white; 
+    border: 5px solid #C70039; 
+    border-radius: 30px; /* Ensure rounded corners */
+    transition: 0.5s; /* Smooth transition for hover effect */
+}
+
+.button:hover {
+    transform: scale(1.05); /* Slightly increase size on hover */
+    border-color: #900; /* Change border color on hover for better visibility */
+}
+
+.button {
+    height: 75%; 
+    width: 100%; 
+    border-radius: 30px; 
+    transition: 0.5s; /* Smooth transition */
+}
+
+.button:hover {
+    opacity: 0.8; /* Change opacity on hover */
+    transition: opacity 0.5s; /* Smooth transition */
+}
+
+#header-title {
+    margin-bottom: 25px;
+    padding: 10px;
+    border-bottom: 7px solid #C70039;
+    font-weight: lighter;
+    font-size: 25px;
+}
+
+.card {
+    padding: 30px;
+}

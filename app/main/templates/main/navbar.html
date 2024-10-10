@@ -3,6 +3,7 @@
 <html>
 <head>    
     <link rel="stylesheet" href="{% static 'styles/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/home.css' %}">
 </head>
 <body>
     <div class="container">
@@ -26,17 +27,6 @@
                     <p> PPE Detection </p>
                     <input id="f3-ppe" type="checkbox" name="f3" {% if f3 == "on" %}checked{% endif %}>
                     <label for="f3-ppe" class="label"> </label>
-                </div>
-                <div class="f4">
-                    <p>Select Camera Group</p>
-                    <select id="f4-cctv" size="1" name="f4">
-                        {% for camera in cameras %}
-                        <option value="{{ camera.index }}" {% if f4 == camera.index|stringformat:"s" %}selected{% endif %}>
-                            Camera {{ camera.index }} - Resolution: {{ camera.resolution.0 }}x{{ camera.resolution.1 }}
-                        </option>
-                        {% endfor %}
-                    </select>
-                    <label for="f4-cctv" class="label"></label>
                 </div>
                 <div class="submit-button">
                     <p> Submit </p>

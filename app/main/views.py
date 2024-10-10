@@ -18,9 +18,7 @@ def home(request):
     # Get submitted values
     f1 = request.GET.get("f1", "off")
     f2 = request.GET.get("f2", "off")
-
     f3 = request.GET.get("f3", "off")
-    f4 = request.GET.get("f4", None)
 
     # Detect available cameras
     cameras = []
@@ -37,8 +35,6 @@ def home(request):
         'f1': f1,
         'f2': f2,
         'f3': f3,
-        'f4': f4,
-        'cameras': cameras,
     }
     if(f1=="on"):
         movement_feed(request)
@@ -46,7 +42,7 @@ def home(request):
         door_feed(request)
     if(f3=="on"):
         ppe_feed(request)
-
+        
     return render(request, 'main/home.html', context)
 
 def user_login(request):
@@ -61,9 +57,7 @@ def user_login(request):
             messages.error(request, 'Invalid username or password')
     return render(request, 'main/login.html')
 
-import cv2 as cv
-import numpy as np
-from django.http import StreamingHttpResponse
+
 
 def resize_with_black_bars(frame, target_width=1280, target_height=720):
     height, width = frame.shape[:2]
@@ -149,7 +143,7 @@ def ppe_detection():
 
 def movement_feed(request):
     return StreamingHttpResponse(movement_detection(),
-                                 content_type='multipart/x-mixed-replace; boundary=frame')
+                                 content_type='multipart/x-mixed-replace; boundary=frame')   
 
 def door_feed(request):
     return StreamingHttpResponse(door_detection(),

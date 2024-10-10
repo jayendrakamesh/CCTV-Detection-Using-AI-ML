@@ -1,0 +1,74 @@
+body{
+    margin: 0%;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: large;
+    text-shadow: 2px 2px 12px black;
+}
+
+p, h2{
+    color: ghostwhite;
+}
+
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #004aad;
+}
+
+.title{
+    border-bottom: 5px solid white;
+}
+
+.main, .main-form{
+    display: flex;
+}
+
+.f1, .f2, .f3, .f4{
+    margin-right: 20px;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 7px;
+}
+
+#submit{
+    margin-top: 10px;
+}
+
+input[type="checkbox"] + label {
+    display: inline-block;
+    background-color: gray;
+    width: 50px;
+    height: 25px;
+    border-radius: 200px;
+    cursor: pointer;
+    position: relative;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"] + label::before {
+    position: absolute;
+    content: '';
+    background-color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin: 3px;
+    transform: translateX(0px);
+    transition: 0.5s;
+}
+
+input[type="checkbox"]:checked + label {
+    background-color: green;
+}
+
+input[type="checkbox"]:checked + label::before {
+    background-color: white;
+    transform: translateX(25px);
+}
