@@ -2,28 +2,29 @@
 {% load static %}
 <html>
 <head>    
-    <link rel="stylesheet" href="{% static 'styles/navbar.css' %}">
     <link rel="stylesheet" href="{% static 'styles/home.css' %}">
+
 </head>
 <body>
     {% include 'main/navbar.html' %}
     <div class="container2">
         {% if f1 == "on" %}
-        <div class="video">
-            <img src="{% url 'movement_feed' %}" width="600" height="400">
-        </div>
+        <a href="{% url 'movement_feed' %}" class="video-button">
+            <img src="{% url 'movement_feed' %}" width="600" height="400" alt="Movement Feed">
+        </a>
         {% endif %}
+        
         {% if f2 == "on" %}
-        <div class="video">
-            <img src="{% url 'door_feed' %}" width="600" height="400">
-        </div>
+        <a href="{% url 'door_feed' %}" class="video-button">
+            <img src="{% url 'door_feed' %}" width="600" height="400" alt="Door Feed">
+        </a>
         {% endif %}
+        
         {% if f3 == "on" %}
-        <div class="video">
-            <img src="{% url 'ppe_feed' %}" width="600" height="400">
-        </div>
+        <a href="{% url 'ppe_feed' %}" class="video-button">
+            <img src="{% url 'ppe_feed' %}" width="600" height="400" alt="PPE Feed">
+        </a>
         {% endif %}
     </div>
-    
 </body>
 </html>
