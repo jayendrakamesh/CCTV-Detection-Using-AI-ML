@@ -1,21 +1,25 @@
-
 .container2 {
     display: flex;
-    flex-direction: column;
-    flex-direction: row;
     justify-content: center;
     margin: 0px;
+}
+
+.camera-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    grid-gap: 20px; /* Space between items */
 }
 
 .button {
     border: 5px solid #C70039; 
     transition: 0.5s; /* Smooth transition for hover effect */
     margin: 10px;
+    text-align: center; /* Center align the content inside the button */
 }
 
 .button:hover {
     transform: scale(1.05); /* Slightly increase size on hover */
-    border-color: #900; /* Change border color on hover for better visibility */
+    border-color: #900; /* Change border color on hover */
     opacity: 0.8; /* Change opacity on hover */
     transition: opacity 0.5s; /* Smooth transition */
     transition: 0.5s;
