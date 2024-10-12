@@ -5,6 +5,11 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 import cv2 as cv
 import torch
+from ultralytics import YOLO
+
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+model1 = YOLO('main/best.pt').to(device)
+model2 = YOLO('main/best2.pt').to(device)
 
 def user_login(request):
     if request.method == 'POST':
@@ -20,9 +25,9 @@ def user_login(request):
 
 def home(request):
 
-    f1 = request.GET.get("f1", "off")
-    f2 = request.GET.get("f2", "off")
-    f3 = request.GET.get("f3", "off")
+    request.session['f1'] = request.GET.get("f1", 'off')
+    request.session['f2'] = request.GET.get("f2", 'off')
+    request.session['f3'] = request.GET.get("f3", 'off')
 
     cameras = []
     for i in range(3):
@@ -34,9 +39,9 @@ def home(request):
         cap.release()
 
     context = {
-        'f1': f1,
-        'f2': f2,
-        'f3': f3,
+        'f1': request.session['f1'],
+        'f2': request.session['f2'],
+        'f3': request.session['f3'],
         'cameras': cameras,
     }
 
@@ -66,15 +71,20 @@ def resize_with_black_bars(frame, target_width=1280, target_height=720):
 
     return new_frame
 
-def generate_camera_stream(camera_index):
+def generate_camera_stream(camera_index, apply_detection1, apply_detection2):
     cap = cv.VideoCapture(camera_index)
     while cap.isOpened():
         ret, frame = cap.read()
         if not ret:
             break
 
-        # Resize frame to a standard resolution with black bars if necessary
-        frame = resize_with_black_bars(frame)
+        if apply_detection1:
+            results = model1.predict(source=frame, conf=0.25, save=False, show=False, device=device, half=True)
+            frame = results[0].plot()  # Draw detection results on the frame
+        
+        if apply_detection2:
+            results = model2.predict(source=frame, conf=0.25, save=False, show=False, device=device, half=True)
+            frame = results[0].plot()  # Draw detection results on the frame
 
         # Encode the frame as JPEG
         ret, jpeg = cv.imencode('.jpg', frame)
@@ -84,9 +94,17 @@ def generate_camera_stream(camera_index):
     
     cap.release()
 
-
-# Stream view for each camera
 @login_required
 def stream_camera(request, camera_index):
-    return StreamingHttpResponse(generate_camera_stream(camera_index),
-                                 content_type='multipart/x-mixed-replace; boundary=frame')
+    # Check if f1 is 'on' to apply door detection
+    choice1 = False
+    choice2 = False
+    if request.GET.get("f1", request.session.get('f1', 'off'))=='on':
+        choice1 = True
+    if request.GET.get("f2", request.session.get('f2', 'off'))=='on':
+        choice2 = True
+
+    return StreamingHttpResponse(
+        generate_camera_stream(camera_index, apply_detection1=choice1, apply_detection2=choice2 ),
+        content_type='multipart/x-mixed-replace; boundary=frame'
+    )
