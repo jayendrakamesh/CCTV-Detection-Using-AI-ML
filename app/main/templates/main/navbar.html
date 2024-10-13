@@ -13,20 +13,25 @@
         <div class="main">
             <form class="main-form" action="{% url 'home' %}" method="get">
                 {% csrf_token %}
-                <div class="f1">
-                    <p> Movement Detection </p>
-                    <input id="f1-movement" type="checkbox" name="f1" {% if f1 == "on" %}checked{% endif %}>
-                    <label for="f1-movement" class="label"> </label>
-                </div>
                 <div class="f2">
+                    <p> PPE Detection </p>
+                    <input id="f2-ppe" type="checkbox" name="f2" {% if f2 == "on" %}checked{% endif %}>
+                    <label for="f2-ppe" class="label"> </label>
+                </div>
+                <div class="f1">
                     <p> Door Detection </p>
-                    <input id="f2-door" type="checkbox" name="f2" {% if f2 == "on" %}checked{% endif %}>
-                    <label for="f2-door" class="label"> </label>
+                    <input id="f1-door" type="checkbox" name="f1" {% if f1 == "on" %}checked{% endif %}>
+                    <label for="f1-door" class="label"> </label>
                 </div>
                 <div class="f3">
-                    <p> PPE Detection </p>
+                    <p> Movement Detection </p>
                     <input id="f3-ppe" type="checkbox" name="f3" {% if f3 == "on" %}checked{% endif %}>
                     <label for="f3-ppe" class="label"> </label>
+                </div>
+                <div class="f4">
+                    <p> Export Mail </p>
+                    <input id="f4-mail" type="checkbox" name="f4" {% if f3 == "on" %}checked{% endif %}>
+                    <label for="f4-mail" class="label"> </label>
                 </div>
                 <div class="submit-button">
                     <p> Submit </p>
